@@ -1,0 +1,50 @@
+<div class="col-md-4 mx-auto">
+    <div class="card">
+    <div class="card-header">
+        Agregar producto
+    </div>
+    <div class="card-body">
+        <form action="/productos/new" method="POST">
+            <div class="form-group">
+                <input name="nombre" type="text" class="form-control" placeholder="Nombre" autofocus>
+            </div>
+            <div class="form-group">
+                <input name="descripcion" type="text" class="form-control" placeholder="Descripción">
+            </div>
+            <div class="form-group">
+                <input name="modelo" type="text" class="form-control" placeholder="modelo" autofocus>
+            </div>
+            <div class="form-group">
+                <input name="precio" type="number" class="form-control" placeholder="precio">
+            </div>
+            <div class="form-group">
+                <input name="imagen" type="text" class="form-control" placeholder="Imagen" autofocus>
+            </div>
+
+            <div class="form-group">
+                <input name="nombre_prov" type="text" class="form-control" placeholder="Nombre de proveedor">
+            </div>
+            <div class="form-group">
+                <input name="direccion_prov" type="text" class="form-control" placeholder="dirección de proveedor" autofocus>
+            </div>
+            <div class="form-group">
+                <input name="email_prov" type="text" class="form-control" placeholder="email">
+            </div>
+            <div class="form-group">
+                <input name="telefono_prov" type="text" class="form-control" placeholder="Telefono" autofocus>
+            </div>
+
+            <div class="form-group">
+                <input name="nombre_cat" type="text" class="form-control" placeholder="nombre categoria">
+            </div>
+            <div class="form-group">
+                <input name="descripcion_cat" type="text" class="form-control" placeholder="descripción categoria">
+            </div>
+            <div class="form-group">
+                <input name="imagen_cat" type="text" class="form-control" placeholder="Imagen categoria">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add</button>
+        </form>
+    </div>
+</div>
+</div>
