@@ -1,19 +1,18 @@
 const router = require('express').Router();
-
 const { restart } = require('nodemon');
 const Producto = require('../models/Producto');
+const fs = require('fs-extra'); //Mdoulo para mover la imgen 
+const { isAuthenticated } = require('../helpers/auth'); //Sirve para proteger las rutas
 
-const { isAuthenticated } = require('../helpers/auth');
-
-router.get('/productos',(req,res) =>{
+router.get('/productos',isAuthenticated,(req,res) =>{
     res.render('productos/all-product');
 })
 
 router.get('/productos/agregar',(req,res) =>{
     res.render('productos/new-product');
 })
-
-router.post('/productos/new', async (req,res) =>{
+//Ruta para agregar los productos
+router.post('/productos/new', isAuthenticated, async (req,res) =>{
     const { nombre,descripcion,modelo,precio,imagen,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat,imagen_cat } = req.body;
 
     const newProduct = new Producto({
@@ -38,6 +37,8 @@ router.post('/productos/new', async (req,res) =>{
     res.redirect('/productos');
 })
 
+//Ejemplos para hacer las partes del CRUD
+/*
 router.get('/notes', isAuthenticated, async (req,res) =>{
     const notes = await Note.find({user: req.user.id}).lean().sort({date: -1});
     res.render('notes/all-notes',{ notes });
@@ -62,4 +63,5 @@ router.delete('/notes/delete/:id', isAuthenticated, async (req,res) =>{
 })
 
 
+*/
 module.exports = router
