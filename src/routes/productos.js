@@ -3,6 +3,7 @@ const { restart } = require('nodemon');
 const Producto = require('../models/Producto');
 const fs = require('fs-extra'); //Mdoulo para mover la imgen 
 const { isAuthenticated } = require('../helpers/auth'); //Sirve para proteger las rutas
+const path = require('path');
 
 router.get('/productos',isAuthenticated,(req,res) =>{
     res.render('productos/all-product');
@@ -12,15 +13,27 @@ router.get('/productos/agregar',(req,res) =>{
     res.render('productos/new-product');
 })
 //Ruta para agregar los productos
-router.post('/productos/new', isAuthenticated, async (req,res) =>{
-    const { nombre,descripcion,modelo,precio,imagen,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat,imagen_cat } = req.body;
+router.post('/productos/new', async (req,res) =>{
+    const { nombre,descripcion,modelo,precio,cantidad,imagen,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat } = req.body;
+    
+    async function guardarimagen() {
+        const filePatch = req.file.path;
+        const targetPath = path.resolve(`public/upload/${req.file.originalname}`);
+        await fs.rename(filePatch, targetPath); 
+    }
+    
+    guardarimagen();
+    console.log(req.file)
 
+    const imagennombre = req.file.originalname;
+    
     const newProduct = new Producto({
         nombre,
         descripcion,
         modelo,
         precio,
-        imagen,
+        cantidad,
+        imagennombre,
         "proveedor":{
             "nombre": nombre_prov,
             "direccion": direccion_prov,
@@ -30,7 +43,7 @@ router.post('/productos/new', isAuthenticated, async (req,res) =>{
         "categoria": {
             "nombre": nombre_cat,
             "descripcion": descripcion_cat,
-            "imagen": imagen_cat
+            
         }
     });
     await newProduct.save();

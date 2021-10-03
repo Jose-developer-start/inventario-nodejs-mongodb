@@ -67,66 +67,69 @@
                 <button type="button" class="btn-close btn-info" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times-circle"></i></button>
             </div>
             <div class="modal-body">
-                <form action="productos/new" method="POST" class="row g-3">
+                <form action="productos/new" method="POST" enctype="multipart/form-data" class="row g-3">
                     <div class="col-md-4">
                         <label for="inputEmail4" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="inputEmail4">
+                        <input type="text" name="nombre" class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-4">
                         <label for="inputPassword4" class="form-label">Nombre Proveedor</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" name="nombre_prov" class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-md-4">
                         <label for="inputPassword4" class="form-label">Categoria</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" name="nombre_cat" class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-md-4">
-                        <label for="inputPassword4" class="form-label">Detalles</label>
+                        <label for="inputPassword4" class="form-label">Detalles de Producto</label>
                         <textarea name="descripcion" class="form-control"></textarea>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputPassword4" class="form-label">Direción</label>
-                        <textarea name="comentarios" class="form-control"></textarea>
+                        <label for="inputPassword4" class="form-label">Dirección</label>
+                        <textarea name="direccion_prov" class="form-control"></textarea>
                     </div>
                     <div class="col-md-4">
                         <label for="inputPassword4" class="form-label">Descripcion</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" name="descripcion_cat" class="form-control" id="inputPassword4">
                     </div>
 
                     <div class="col-md-4">
                         <label for="inputEmail4" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="inputEmail4">
+                        <input type="text" name="modelo" class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-4">
                         <label for="inputPassword4" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="inputPassword4">
+                        <input type="email" name="email_prov" class="form-control" id="inputPassword4">
                     </div>
-                    <div class="mb-3 col-md-4">
-                        <label for="formFile" class="form-label">Archivo</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
-
+                    
                     <div class="col-md-4">
                         <label for="inputAddress" class="form-label">Cantidad</label>
-                        <input type="number" min="1" class="form-control" id="inputAddress">
-                    </div>                                                
+                        <input type="number" name="cantidad" min="1" class="form-control" id="inputAddress">
+                    </div> 
+
+                    <div class="col-md-4">
+                        <label for="inputAddress" class="form-label">Precio</label>
+                        <input type="number" name="precio" min="1"  class="form-control" id="inputAddress">
+                    </div>                                               
                     
                     <div class="col-md-4">
                         <label for="inputAddress" class="form-label">Telefono</label>
-                        <input type="phone" class="form-control" id="inputAddress">
+                        <input type="phone" name="telefono_prov" class="form-control" id="inputAddress">
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="formFile" class="form-label">imagen </label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control"  name="imagen" type="file" id="formFile">
                     </div>
-                    
+
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+
                 
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Agregar</button>
-            </div>
+            
         </div>
     </div>
 </div>
