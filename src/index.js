@@ -62,7 +62,8 @@ app.use(require("./routes/productos.js"));
 //Static files
 
 app.use(express.static(path.join(__dirname, "public")));
-
+//Patch file
+app.set('patchImge',__filename);
 //Server is Listening
 app.listen(app.get("port"), () => {
 	console.log("Server on port ", app.get("port"));
