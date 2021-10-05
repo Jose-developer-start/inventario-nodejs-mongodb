@@ -30,7 +30,7 @@ app.engine(
 app.set("view engine", ".hbs");
 
 //Middleware
-app.use(multer({dest:path.join(__dirname,'./src/public/upload')}).single('imagen'));
+app.use(multer({dest:path.join(__dirname,'./public/upload')}).single('imagen'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(

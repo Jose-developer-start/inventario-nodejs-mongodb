@@ -5,7 +5,7 @@ const fs = require('fs-extra'); //Mdoulo para mover la imgen
 const { isAuthenticated } = require('../helpers/auth'); //Sirve para proteger las rutas
 const path = require('path');
 
-router.get('/productos',isAuthenticated,(req,res) =>{
+router.get('/productos',(req,res) =>{
     res.render('productos/all-product');
 })
 
@@ -14,18 +14,16 @@ router.get('/productos/agregar',(req,res) =>{
 })
 //Ruta para agregar los productos
 router.post('/productos/new', async (req,res) =>{
-    const { nombre,descripcion,modelo,precio,cantidad,imagen,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat } = req.body;
-    
-    async function guardarimagen() {
+    const { nombre,descripcion,modelo,precio,cantidad,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat } = req.body;
+    //Nombre de la imagen
+    const imagen = Date.now() + "_" + req.file.originalname;
+    const guardarImagen = async() => {
         const filePatch = req.file.path;
-        const targetPath = path.resolve(`public/upload/${req.file.originalname}`);
+        const targetPath = path.resolve(`src/public/upload/${imagen}`);
         await fs.rename(filePatch, targetPath); 
     }
-    
-    guardarimagen();
-    console.log(req.file)
-
-    const imagennombre = req.file.originalname;
+    //Guarda la imagen
+    guardarImagen();
     
     const newProduct = new Producto({
         nombre,
@@ -33,7 +31,7 @@ router.post('/productos/new', async (req,res) =>{
         modelo,
         precio,
         cantidad,
-        imagennombre,
+        imagen : imagen,
         "proveedor":{
             "nombre": nombre_prov,
             "direccion": direccion_prov,
@@ -48,6 +46,7 @@ router.post('/productos/new', async (req,res) =>{
     });
     await newProduct.save();
     res.redirect('/productos');
+    
 })
 
 //Ejemplos para hacer las partes del CRUD
