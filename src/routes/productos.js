@@ -6,7 +6,7 @@ const fs = require('fs-extra'); //Mdoulo para mover la imgen
 const { isAuthenticated } = require('../helpers/auth'); //Sirve para proteger las rutas
 const path = require('path');
 
-router.get('/productos', async (req,res) =>{
+router.get('/productos', isAuthenticated, async (req,res) =>{
     const productos = await Producto.find().lean().sort({date: -1});
     res.render('productos/all-product',{productos});
 })
@@ -15,7 +15,7 @@ router.get('/productos/agregar',(req,res) =>{
     res.render('productos/new-product');
 })
 //Ruta para agregar los productos
-router.post('/productos/new', async (req,res) =>{
+router.post('/productos/new', isAuthenticated, async (req,res) =>{
     const { nombre,descripcion,modelo,precio,cantidad,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat } = req.body;
     //Nombre de la imagen
     const imagen = Date.now() + "_" + req.file.originalname;
@@ -50,11 +50,11 @@ router.post('/productos/new', async (req,res) =>{
     res.redirect('/productos');
     
 })
-router.get('/productos/edit/:id', async (req,res) =>{
+router.get('/productos/edit/:id', isAuthenticated, async (req,res) =>{
     const producto = await Producto.findById(req.params.id).lean();
     res.render('productos/edit-product',{ producto });
 })
-router.put('/productos/update/:id', async (req,res) =>{
+router.put('/productos/update/:id', isAuthenticated, async (req,res) =>{
     const { nombre,descripcion,modelo,precio,cantidad,nombre_prov,direccion_prov,email_prov,telefono_prov,nombre_cat,descripcion_cat,imagen_cat } = req.body
     //Nombre de la imagen
     const imagen = Date.now() + "_" + req.file.originalname;
@@ -94,7 +94,7 @@ router.put('/productos/update/:id', async (req,res) =>{
     
 })
 
-router.delete('/productos/delete/:id', async (req, res)=>{
+router.delete('/productos/delete/:id', isAuthenticated, async (req, res)=>{
     await Producto.findByIdAndDelete({_id: req.params.id});
     req.flash('success_msg', 'Producto eliminado!!');
     res.redirect('/productos');

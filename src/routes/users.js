@@ -1,10 +1,36 @@
 const router = require("express").Router();
-
+const { isAuthenticated } = require('../helpers/auth'); //Sirve para proteger las rutas
 const User = require("../models/User");
 const passport = require("passport");
 
-router.get("/users", (req, res) => {
-	res.render("users/all-users");
+router.get("/users",isAuthenticated, async (req, res) => {
+	const users = await User.find().lean();
+	res.render("users/all-users",{users});
+});
+
+router.get('/users/edit/:id', isAuthenticated, async (req,res) =>{
+    const user = await User.findById(req.params.id).lean();
+    res.render('users/edit',{ user });
+})
+
+router.put('/users/update/:id', isAuthenticated, async (req,res) =>{
+    const { name,last_name,phone,email } = req.body
+
+    await User.findByIdAndUpdate({_id: req.params.id},{
+        name: name,
+        last_name: last_name,
+        phone: phone,
+        email: email
+    });
+    req.flash('success_msg', 'Usuario actualizado');
+    res.redirect('/users');
+    
+})
+//Eliminar usuarios
+router.delete('/users/delete/:id', isAuthenticated, async (req, res)=>{
+    await User.findByIdAndDelete({_id: req.params.id});
+    req.flash('success_msg', 'Usuario eliminado!!');
+    res.redirect('/users');
 });
 
 router.get("/users/signin", (req, res) => {
