@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="row mr-1">
-            <form action="validar.php" class="container mt-5 mr-1">
+            <div class="container mt-5 mr-1">
                 <div class="row form-group justify-content-center text-center">
 
                     <div class="col-md-12 formulario">
@@ -13,12 +13,9 @@
                             <div>
                                 <a href="/users/signup" class="btn btn-success">Registrar usuario</a>
                             </div>
-                            <div>
-                                <input type="text" placeholder="buscar" class="form-control">
-                            </div>
                         </div>
                         <br>
-                        <table class="table caption-top table-info">
+                        <table class="table caption-top table-info" id="table_users">
 
                             <thead>
                                 <tr>
@@ -36,11 +33,13 @@
                                     <td>{{ this.email }}</td>
                                     <td>
                                         
-                                        <a href="/users/edit/{{this._id}}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                        <form action="/users/delete/{{this._id}}?_method=DELETE" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
-                                        </form>
+                                       <div class="row">
+                                            <a href="/users/edit/{{this._id}}" class="btn btn-primary btn-sm mx-3"><i class="far fa-edit"></i></a>
+                                            <form action="/users/delete/{{this._id}}?_method=DELETE" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                            </form>
+                                       </div>
                                         
                                     </td>
                                 </tr>
@@ -52,7 +51,7 @@
 
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
