@@ -91,12 +91,12 @@ router.post("/users/signup", async (req, res) => {
 		});
 		const emailUser = await User.findOne({ email: email });
 		if (emailUser) {
-			req.flash("error_msg", "you are register");
+			req.flash("error_msg", "Ya estas registrado!!");
 			res.redirect("/users/signup");
 		}
 		newUser.password = await newUser.encryptPassword(password);
 		await newUser.save();
-		req.flash("success_msg", "you are register");
+		req.flash("success_msg", "Registrado!!");
 		res.redirect("/users/signin");
 	}
 });
