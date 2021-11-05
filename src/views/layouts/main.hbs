@@ -56,6 +56,38 @@
                 "lengthMenu": [[5, 10, 20,50, -1], [5, 10, 20,50, "All"]]
             });
         } );
+        //products-reportes
+        $(document).ready(function() {
+        $('#products-reportes').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    //Botón para PDF
+                    extend: 'pdf',
+                    footer: true,
+                    title: 'Informe de notas',
+                    filename: 'reporte_productos',
+
+                    //Aquí es donde generas el botón personalizado
+                    text: '<button class="btn btn-info btn-sm b-0">PDF <i class="far fa-file-pdf"></i></button>'
+                },
+                {
+                    //Botón para imprimir
+                    extend: 'print',
+                    footer: true,
+                    title: 'Informe de notas',
+                    filename: 'reporte_productos-impress',
+
+                    //Aquí es donde generas el botón personalizado
+                    text: '<button class="btn btn-secondary btn-sm b-0">Imprimir <i class="fas fa-print"></i></button>'
+                },
+                
+            ],
+            "language": {
+                "url" : "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+            }
+        } );
+    } );
     </script>
 </body>
 </html>
