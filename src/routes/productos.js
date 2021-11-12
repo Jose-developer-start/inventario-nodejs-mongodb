@@ -95,8 +95,12 @@ router.put('/productos/update/:id', isAuthenticated, async (req,res) =>{
 })
 
 router.delete('/productos/delete/:id', isAuthenticated, async (req, res)=>{
+    //DELETE IMAGES PRODUCTS
+    const producto = await Producto.findById(req.params.id);
+    const patchImg = path.resolve(`src/public/upload/`);
+    await fs.unlink(patchImg + '/' + producto.imagen);
     await Producto.findByIdAndDelete({_id: req.params.id});
     req.flash('success_msg', 'Producto eliminado!!');
-    res.redirect('/productos');
+    res.redirect('/productos'); //Redirect route => /productos
 });
 module.exports = router
