@@ -66,10 +66,10 @@ router.put('/productos/update/:id', isAuthenticated, async (req,res) =>{
     //Guarda la imagen
     guardarImagen();
     //Ruta
-    const patchImg = `C:/Users/SISTEMA21/Desktop/DB-Proyect/inventario-nodejs-mongodb/src/public/upload/`;
+    const patchImg = path.resolve(`src/public/upload/`);
     
     const producto = await Producto.findById(req.params.id);
-    await fs.unlink(patchImg + producto.imagen);
+    await fs.unlink(patchImg + '/' + producto.imagen);
     
     await Producto.findByIdAndUpdate({_id: req.params.id},{
         nombre,
